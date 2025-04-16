@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
+        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -43,6 +44,13 @@
             gap: 20px;
             align-items: center;
             margin-right: -25px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f9fa;
+            /*margin: 0;*/
+            /*padding: 0;*/
         }
         .hero-section {
             background: url('assests/get_care_now_slide2.jpg') no-repeat center center/cover;
@@ -174,17 +182,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#aboutus">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
-                <li class="nav-item"><a class="nav-link" href="#staff">Our Staff</a></li>
-                <li class="nav-item"><a class="nav-link" href="BookAppoinment.html">Book Appointment</a></li>
+                <li class="nav-item"><a class="nav-link" href="Doctor-Consultancy.html">Doctor calender</a></li>
                 <li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li>
+                <div class="nav-button">
+                    <a href="BookAppoinment.html" class="btn btn-outline-primary">Book Appointment</a>
+                </div>
             </ul>
-            <div class="nav-button">
-                <a href="LoginPage.html" class="btn btn-outline-primary">Login</a>
-                <a href="Registerpage.html" class="btn btn-primary">Patient Registration</a>
-            </div>
         </div>
     </div>
 </nav>
@@ -218,7 +224,7 @@
                     <div class="mb-3">
                         <label class="form-label">Select Doctor</label>
                         <select id="selectdoctor" class="form-select">
-                            <option > selected>Choose a Doctor</option>
+                            <option >Choose a Doctor</option>
                             <option value="Dr. John Smith">Dr. John Smith - Cardiologist</option>
                             <option value="Dr. Sarah Lee">Dr. Sarah Lee - Dermatologist</option>
                             <option value="Dr. Nimal">Dr. Nimal - Cardiologist</option>

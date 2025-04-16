@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Doctor Dashboard | HealthFirst</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #eef7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 20px;
+        }
+
+        .card-metric {
+            background-color: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            flex: 1 1 220px;
+            text-align: center;
+            max-width: 260px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-metric:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-metric i {
+            font-size: 2.2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .card-metric h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-metric p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .appointments {
+            margin: 50px 20px;
+        }
+
+        .appointments h3 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #145775;
+        }
+
+        .appointment-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .appointment-card strong {
+            color: #007bff;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .card-metric {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-header">
+    <h1>Welcome, Dr. Smith</h1>
+    <p>Your daily overview at HealthFirst</p>
+</div>
+
+<div class="metrics">
+    <div class="card-metric">
+        <i class="fas fa-calendar-check"></i>
+        <h5>Appointments</h5>
+        <p>12 Today</p>
+    </div>
+    <div class="card-metric">
+        <i class="fas fa-users"></i>
+        <h5>Patients</h5>
+        <p>45 Total</p>
+    </div>
+    <div class="card-metric">
+        <i class="fas fa-file-prescription"></i>
+        <h5>Prescriptions</h5>
+        <p>8 Issued</p>
+    </div>
+    <div class="card-metric">
+        <i class="fas fa-vials"></i>
+        <h5>Lab Reports</h5>
+        <p>3 Pending</p>
+    </div>
+</div>
+
+<div class="appointments container">
+    <h3>Today's Appointments</h3>
+    <div class="appointment-card">
+        <strong>John Doe</strong> — 10:30 AM | <em>General Check-up</em>
+    </div>
+    <div class="appointment-card">
+        <strong>Mary Silva</strong> — 11:00 AM | <em>Diabetes Consultation</em>
+    </div>
+    <div class="appointment-card">
+        <strong>Samuel Lee</strong> — 1:15 PM | <em>Blood Pressure Follow-up</em>
+    </div>
+</div>
+
+</body>
+</html>
+l>

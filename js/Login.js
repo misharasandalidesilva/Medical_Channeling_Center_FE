@@ -31,7 +31,7 @@ $(document).ready(function () {
                 console.log(uid);
 
                     if (rolee === "USER") {
-                        window.location.href = "./index.html";
+                        window.location.href = "./UserProfile.html";
                     } else if (rolee === "ADMIN") {
                         window.location.href = "./AdminDashboard.html";
                     } else if (rolee === "DOCTOR") {
