@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Calendar | Consultation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #eef5f9;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 1px;
+        }
+        .table thead {
+            background-color: #007bff;
+            color: white;
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f9ff;
+        }
+        .form-select, .form-control {
+            border-radius: 10px;
+        }
+        h2 {
+            color: #004085;
+            font-size: 45px;
+            font-weight: bold;
+        }
+        p {
+            color: #333;
+        }
+        .speciality-section {
+            margin-top: 50px;
+        }
+        .speciality-header {
+            color: #333;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .speciality-item {
+            background-color: #f0f0f0;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .speciality-item h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .speciality-content {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .speciality-toggle {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 20px;
+        }
+        .active .speciality-toggle:after {
+            content: "-";
+        }
+        .speciality-toggle:after {
+            content: "+";
+        }
+        .active {
+            background-color: #e0e0e0;
+        }
+        .hero-section {
+            background: url('assests/How-to-Develop-a-Doctor-Appointment-Booking-App-to-Stop-Losing-Opportunities-With-No-Shows__Cover-scaled.jpg.webp') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        /* Responsive Footer */
+        .footer {
+            background-color: #145775;
+            color: white;
+            padding: 1rem 0 0rem;
+
+        }
+        .contact-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-left: 100px;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            line-height: 40px;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .py-5 {
+            padding-top: 7rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 1rem !important;
+        }
+        .h1, h1 {
+            font-size: calc(2rem + 1.5vw);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="hero-section">
+</div>
+
+<div class="container">
+    <h2 class="text-center mb-4">Doctor Consultation Schedule</h2>
+    <p class="text-center">Below is the weekly schedule of available doctors and their consultation timings. Patients can refer to this table to book appointments accordingly.</p>
+
+    <div class="d-flex justify-content-between mb-3">
+        <select class="form-select w-25" id="specializationFilter">
+            <option value="All">All</option>
+            <option value="Cardiologist">Cardiologist</option>
+            <option value="Dermatologist">Dermatologist</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="Orthopedic">Orthopedic</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="Endocrinologist">Endocrinologist</option>
+            <option value="ENT Specialist">ENT Specialist</option>
+            <option value="General Surgeon">General Surgeon</option>
+            <option value="Physician">Physician</option>
+            <option value="Health and Lifestyle Management">Health and Lifestyle Management</option>
+        </select>
+        <input type="text" id="searchDoctor" class="form-control w-50" placeholder="Search Doctor here...">
+    </div>
+
+    <table class="table table-bordered text-center">
+        <thead>
+        <tr>
+            <th>Doctor Name</th>
+            <th>Speciality</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+        </tr>
+        </thead>
+        <tbody id="doctorTable">
+        <tr>
+            <td>Dr. John Doe</td>
+            <td>Cardiologist</td>
+            <td>5:00PM</td>
+            <td>6:00PM</td>
+            <td>4:00PM</td>
+            <td>3:00PM</td>
+            <td>7:00PM</td>
+            <td>2:00PM</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Dr. Jane Smith</td>
+            <td>Dermatologist</td>
+            <td>9:00AM</td>
+            <td>10:00AM</td>
+            <td>11:00AM</td>
+            <td>2:00PM</td>
+            <td>3:00PM</td>
+            <td>Off</td>
+            <td>10:00AM</td>
+        </tr>
+        <tr>
+            <td>Dr. Emily Davis</td>
+            <td>Psychiatrist</td>
+            <td>2:00PM</td>
+            <td>3:00PM</td>
+            <td>4:00PM</td>
+            <td>5:00PM</td>
+            <td>6:00PM</td>
+            <td>7:00PM</td>
+            <td>2:00PM</td>
+        </tr>
+        <tr>
+            <td>Dr. Robert Brown</td>
+            <td>Neurologist</td>
+            <td>8:00AM</td>
+            <td>9:00AM</td>
+            <td>10:00AM</td>
+            <td>Off</td>
+            <td>2:00PM</td>
+            <td>3:00PM</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Dr. Laura Wilson</td>
+            <td>Orthopedic</td>
+            <td>7:00AM</td>
+            <td>8:00AM</td>
+            <td>9:00AM</td>
+            <td>10:00AM</td>
+            <td>Off</td>
+            <td>Off</td>
+            <td>2:00PM</td>
+        </tr>
+        <tr>
+            <td>Dr. William Taylor</td>
+            <td>Pediatrician</td>
+            <td>Off</td>
+            <td>3:00PM</td>
+            <td>4:00PM</td>
+            <td>5:00PM</td>
+            <td>6:00PM</td>
+            <td>7:00PM</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Prof. Colvin Gunaratne</td>
+            <td>Physician</td>
+            <td>3:30PM</td>
+            <td>3:30PM</td>
+            <td>11:00AM</td>
+            <td>Off</td>
+            <td>3:30PM</td>
+            <td>11:00AM</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Prof. Indu Waidyatilaka</td>
+            <td>Health and Lifestyle Management</td>
+            <td>4:00PM</td>
+            <td>Off</td>
+            <td>4:00PM</td>
+            <td>Off</td>
+            <td>Off</td>
+            <td>Off</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Dr. Michael Johnson</td>
+            <td>Endocrinologist</td>
+            <td>1:00PM</td>
+            <td>2:00PM</td>
+            <td>3:00PM</td>
+            <td>Off</td>
+            <td>1:00PM</td>
+            <td>Off</td>
+            <td>12:00PM</td>
+        </tr>
+        <tr>
+            <td>Dr. Sarah Lee</td>
+            <td>ENT Specialist</td>
+            <td>11:00AM</td>
+            <td>12:00PM</td>
+            <td>Off</td>
+            <td>1:00PM</td>
+            <td>2:00PM</td>
+            <td>3:00PM</td>
+            <td>Off</td>
+        </tr>
+        <tr>
+            <td>Dr. Thomas Clark</td>
+            <td>General Surgeon</td>
+            <td>9:00AM</td>
+            <td>Off</td>
+            <td>10:00AM</td>
+            <td>11:00AM</td>
+            <td>12:00PM</td>
+            <td>Off</td>
+            <td>10:00AM</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Speciality Overview Section -->
+    <div class="speciality-section">
+        <h2 class="speciality-header text-center">SPECIALITY OVERVIEW</h2>
+
+        <div class="speciality-container">
+            <div class="speciality-item" data-target="cardiology">
+                <h3>Cardiology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="cardiology" class="speciality-content">
+                <p>Our cardiology department provides comprehensive heart care services including diagnosis, treatment, and prevention of heart diseases. Our experienced cardiologists use the latest technology to deliver high-quality cardiac care.</p>
+            </div>
+
+            <div class="speciality-item" data-target="dermatology">
+                <h3>Dermatology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="dermatology" class="speciality-content">
+                <p>Our dermatology department offers comprehensive care for conditions affecting the skin, hair, and nails. Our dermatologists are experienced in diagnosing and treating various skin conditions, from common concerns like acne to more complex diseases.</p>
+            </div>
+
+            <div class="speciality-item" data-target="psychiatry">
+                <h3>Psychiatry</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="psychiatry" class="speciality-content">
+                <p>Our psychiatry department is dedicated to mental health care and treatment. Our psychiatrists provide compassionate care for a range of mental health conditions, including depression, anxiety, bipolar disorder, and more.</p>
+            </div>
+
+            <div class="speciality-item" data-target="neurology">
+                <h3>Neurology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="neurology" class="speciality-content">
+                <p>Our neurology department specializes in the diagnosis and treatment of disorders affecting the brain, spinal cord, and nervous system. Our team of neurologists is dedicated to providing advanced care for complex neurological conditions.</p>
+            </div>
+
+            <div class="speciality-item active" data-target="orthopedics">
+                <h3>Orthopedics</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="orthopedics" class="speciality-content" style="display: block;">
+                <p>Experience optimal musculoskeletal care with our Orthopaedic doctors. From long term joint pains to sports injuries, our team is equipped to provide advanced orthopaedic treatments to help you gain mobility to enhance your overall quality of life.</p>
+            </div>
+
+            <div class="speciality-item" data-target="pediatrics">
+                <h3>Pediatrics</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="pediatrics" class="speciality-content">
+                <p>Our pediatrics department offers comprehensive healthcare for infants, children, and adolescents. Our pediatricians are committed to providing preventive care, treating illnesses, and supporting the healthy development of children.</p>
+            </div>
+
+            <div class="speciality-item" data-target="endocrinology">
+                <h3>Endocrinology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="endocrinology" class="speciality-content">
+                <p>Our endocrinology department specializes in diagnosing and treating disorders related to hormones and the endocrine system. Our endocrinologists provide comprehensive care for conditions like diabetes, thyroid disorders, and metabolic conditions.</p>
+            </div>
+
+            <div class="speciality-item" data-target="ent">
+                <h3>ENT Specialist</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="ent" class="speciality-content">
+                <p>Our ENT department provides specialized care for ear, nose, and throat conditions. Our specialists are experienced in diagnosing and treating a wide range of ENT disorders, from common issues like sinusitis to more complex conditions.</p>
+            </div>
+
+            <div class="speciality-item" data-target="surgery">
+                <h3>General Surgery</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="surgery" class="speciality-content">
+                <p>Our general surgery department offers a wide range of surgical procedures. Our surgeons are skilled in both traditional and minimally invasive techniques, ensuring the best outcomes for our patients.</p>
+            </div>
+
+            <div class="speciality-item" data-target="physician">
+                <h3>Physician</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="physician" class="speciality-content">
+                <p>Our physicians are dedicated to providing comprehensive primary care. They focus on preventive care, management of chronic diseases, and coordination of care for patients with complex medical needs.</p>
+            </div>
+
+            <div class="speciality-item" data-target="lifestyle">
+                <h3>Health and Lifestyle Management</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="lifestyle" class="speciality-content">
+                <p>Our Health and Lifestyle Management department focuses on promoting overall wellness through lifestyle modifications. Our specialists provide guidance on nutrition, exercise, stress management, and other lifestyle factors to improve health outcomes.</p>
+            </div>
+
+            <div class="speciality-item" data-target="gastroenterology">
+                <h3>Gastroenterology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="gastroenterology" class="speciality-content">
+                <p>Our gastroenterology department provides comprehensive care for digestive disorders. Our specialists are experienced in diagnosing and treating diseases affecting the gastrointestinal tract and liver.</p>
+            </div>
+
+            <div class="speciality-item" data-target="obstetrics">
+                <h3>Obstetrics and Gynaecology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="obstetrics" class="speciality-content">
+                <p>Our obstetrics and gynaecology department provides comprehensive care for women throughout all stages of life. From routine check-ups to specialized treatments, our team is dedicated to women's health and well-being.</p>
+            </div>
+
+            <div class="speciality-item" data-target="oncology">
+                <h3>Oncology</h3>
+                <span class="speciality-toggle"></span>
+            </div>
+            <div id="oncology" class="speciality-content">
+                <p>Our oncology department offers comprehensive cancer care, including screening, diagnosis, treatment, and survivorship support. Our multidisciplinary team works together to provide personalized treatment plans for each patient.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer" id="contact" >
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <img src='assests/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png' class="contact-logo mb-2" alt="HealthFirst Logo" >
+                <p class="text-white-50 mt-3">Providing top-notch healthcare solutions with advanced patient management, appointments, and medical services.</p>
+                <div class="social-links d-flex gap-3 mt-3">
+                    <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <h5 class="text-white mb-3">Services</h5>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Patient Management</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Doctor Appointments</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Medical Tests</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Billing & Payments</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <h5 class="text-white mb-3">Company</h5>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <h5 class="text-white mb-3">Contact Us</h5>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> 123 Health Street, Medical City, NY 10001</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                    <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +1 234 567 8901</li>
+                    <li class="mb-2"><i class="fas fa-envelope me-2"></i> contact@healthfirst.com</li>
+                    <li class="mb-2"><i class="fas fa-globe me-2"></i> www.healthfirst.com</li>
+                    <li><i class="fas fa-clock me-2"></i> Mon - Fri: 8 AM - 8 PM | Sat - Sun: 9 AM - 5 PM</li>
+                </ul>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email subscription">
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-5 pt-3 border-top border-secondary">
+            <p class="text-white-40 mb-0" style="font-size: 13px; color: white">&copy; 2025 HealthFirst Medical Center. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Filter by specialization
+        $('#specializationFilter').on('change', function() {
+            filterTable();
+        });
+
+        // Search doctor by name
+        $('#searchDoctor').on('keyup', function() {
+            filterTable();
+        });
+
+        // Function to filter table based on specialization and search
+        function filterTable() {
+            let filter = $('#specializationFilter').val().toLowerCase();
+            let searchValue = $('#searchDoctor').val().toLowerCase();
+
+            $('tbody tr').each(function() {
+                let doctorName = $(this).find('td:nth-child(1)').text().toLowerCase();
+                let specialty = $(this).find('td:nth-child(2)').text().toLowerCase();
+
+                if ((filter === "all" || specialty.includes(filter)) && doctorName.includes(searchValue)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+        // Speciality section toggle
+        $('.speciality-item').on('click', function() {
+            let target = $(this).data('target');
+
+            // Toggle active class
+            $(this).toggleClass('active');
+
+            // Toggle content visibility
+            $('#' + target).slideToggle(300);
+
+            // Close other panels if open
+            $('.speciality-item').not(this).removeClass('active');
+            $('.speciality-content').not('#' + target).slideUp(300);
+        });
+    });
+</script>
+
+</body>
+</html>

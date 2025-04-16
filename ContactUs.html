@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | HealthFirst</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: #f4f7fc;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+        /* Responsive Navbar */
+        .navbar {
+            background: #ecf3f3 !important;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .navbar-brand {
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+            color: black;
+        }
+        .navbar-nav .nav-link{
+            color: #454343 !important;
+            font-weight: 500;
+            transition:all 0.3s ease;
+            margin: 0 5px;
+        }
+        .home-logo {
+            max-width: 50px;
+            height: auto;
+        }
+        .nav-button {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-right: -25px;
+        }
+
+        .contact-container {
+            background: #ededf3;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+        .contact-info i {
+            font-size: 22px;
+            color: #007bff;
+            margin-right: 10px;
+        }
+        .form-control, .btn {
+            border-radius: 8px;
+        }
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        /* Responsive Footer */
+        .footer {
+            background-color: #145775;
+            color: white;
+            padding: 1rem 0 0rem;
+
+        }
+        .contact-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-left: 100px;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            line-height: 40px;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .py-5 {
+            padding-top: 7rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 1rem !important;
+        }
+        .h1, h1 {
+            font-size: calc(2rem + 1.5vw);
+        }
+        .contact-page{
+            margin-top: -20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-section {
+            background: url('assests/Healthcare-people-group.-Professional-doctor-working-in-hospital-office.png') no-repeat center center/cover;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+    </style>
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar (Same as previous code) -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background: #f5f8f8;">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="homelogo/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png" class="home-logo" alt="HealthFirst Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="#staff">Our Staff</a></li>
+                <li class="nav-item"><a class="nav-link" href="BookAppoinment.html">Book Appointment</a></li>
+                <li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li>
+            </ul>
+            <div class="nav-button">
+                <a href="LoginPage.html" class="btn btn-outline-primary">Login</a>
+                <a href="Registerpage.html" class="btn btn-primary">Patient Registration</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="hero-section">
+</div>
+
+<div class="contact-page">
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: #004085; font-size: 50px;">Contact Us</h2>
+        <p class="text-muted">We value your health and your time. Reach out to us, and we will assist you as soon as possible.</p>
+    </div>
+
+    <div class="row">
+        <!-- Contact Form on the Left -->
+        <div class="col-md-7">
+            <div class="contact-container">
+                <h4 class="fw-bold">Send Us a Message</h4>
+                <p class="text-muted">Have a question or need assistance? Fill out the form below, and we’ll get back to you shortly.</p>
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Details on the Right -->
+        <div class="col-md-5">
+            <div class="contact-container">
+                <h4 class="fw-bold">Get in Touch</h4>
+                <p class="text-muted">Our dedicated team is standing by to provide personalized support. Whether you have a medical inquiry, need to schedule an appointment, or seek guidance about our services, we're just a message or call away. Your health and comfort are our top priorities.</p>
+                <div class="contact-info mt-3">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Health Street, Medical City, NY 10001</p>
+                    <p><i class="fas fa-phone"></i> tel:+1234567890</p>
+                    <p><i class="fas fa-whatsapp"></i> +1 234 567 8901</p>
+                    <p><i class="fas fa-envelope"></i> info@healthfirst.com</p>
+                    <p><i class="fas fa-clock"></i> Mon - Sat: 9 AM - 6 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer class="footer" id="contact" >
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <img src='assests/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png' class="contact-logo mb-2" alt="HealthFirst Logo" >
+                <p class="text-white-50 mt-3">Providing top-notch healthcare solutions with advanced patient management, appointments, and medical services.</p>
+                <div class="social-links d-flex gap-3 mt-3">
+                    <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <h5 class="text-white mb-3">Services</h5>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Patient Management</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Doctor Appointments</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Medical Tests</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Billing & Payments</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <h5 class="text-white mb-3">Company</h5>
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Careers</a></li>
+                    <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4">
+                <h5 class="text-white mb-3">Contact Us</h5>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> 123 Health Street, Medical City, NY 10001</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                    <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +1 234 567 8901</li>
+                    <li class="mb-2"><i class="fas fa-envelope me-2"></i> contact@healthfirst.com</li>
+                    <li class="mb-2"><i class="fas fa-globe me-2"></i> www.healthfirst.com</li>
+                    <li><i class="fas fa-clock me-2"></i> Mon - Fri: 8 AM - 8 PM | Sat - Sun: 9 AM - 5 PM</li>
+                </ul>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email subscription">
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-5 pt-3 border-top border-secondary">
+            <p class="text-white-40 mb-0" style="font-size: 13px">&copy; 2025 HealthFirst Medical Center. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

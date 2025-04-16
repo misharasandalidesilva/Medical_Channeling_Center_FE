@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Medical Channeling</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: #e1eaea;
+            padding: 10px 8px;
+        }
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-link {
+            color: black !important;
+            font-weight: 500;
+            padding: 8px 10px;
+            transition: 0.3s;
+            margin-left: 20px;
+        }
+        .nav-button{
+            margin-left: 20px;
+        }
+        .home-logo{
+            width: 15%;
+            height:15%;
+            margin-left: -23px;
+        }
+        .dashboard{
+            margin-top: 120px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="homelogo/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png" class="home-logo" alt="HealthFirst Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard-Patient.html">Patient</a></li>
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard-Doctor.html">Doctors</a></li>
+            </ul>
+            <div class="nav-button">
+                <a href="AdminDashboard-Profile.html" class="btn btn-primary">Profile</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="dashboard">
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Admin Dashboard</h2>
+
+    <!-- Overview Cards -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card p-3 bg-primary text-white">
+                <h5>Total Doctors</h5>
+                <h3>25</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 bg-success text-white">
+                <h5>Total Patients</h5>
+                <h3>230</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 bg-warning text-dark">
+                <h5>Appointments Today</h5>
+                <h3>15</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 bg-danger text-white">
+                <h5>Pending Payments</h5>
+                <h3>5</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Appointments -->
+    <h4 class="mt-4">Recent Appointments</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Patient Name</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>Dr. Smith</td>
+            <td>2025-04-01</td>
+            <td><span class="badge bg-success">Completed</span></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jane Doe</td>
+            <td>Dr. Adams</td>
+            <td>2025-04-02</td>
+            <td><span class="badge bg-warning">Pending</span></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Mike Ross</td>
+            <td>Dr. Wilson</td>
+            <td>2025-04-02</td>
+            <td><span class="badge bg-danger">Canceled</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

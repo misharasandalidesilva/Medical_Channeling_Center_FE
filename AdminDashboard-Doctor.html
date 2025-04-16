@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Doctor Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: #e1eaea;
+            padding: 10px 8px;
+        }
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: bold;
+            color: black;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-link {
+            color: black !important;
+            font-weight: 500;
+            padding: 8px 10px;
+            transition: 0.3s;
+            margin-left: 20px;
+        }
+        .nav-button{
+            margin-left: 20px;
+        }
+        .home-logo{
+            width: 15%;
+            height:15%;
+            margin-left: -23px;
+        }
+        .dashboard-container {
+            padding: 100px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            border-radius: 6px;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            border-radius: 6px;
+        }
+        .footer-container {
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+        <img src="homelogo/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png" class="home-logo" alt="HealthFirst Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard-Patient.html">Patient</a></li>
+                <li class="nav-item"><a class="nav-link" href="AdminDashboard-Doctor.html">Doctors</a></li>
+            </ul>
+            <div class="nav-button">
+                <a href="AdminDashboard-Profile.html" class="btn btn-primary">Profile</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container dashboard-container">
+    <h2 class="text-center mb-4">Doctor Management</h2>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDoctorModal">
+            + Add Doctor
+        </button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="doctortable">
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="addDoctorModal" tabindex="-1" aria-labelledby="addDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDoctorModalLabel">Add New Doctor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input id="name" type="text" class="form-control" placeholder="Enter full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Specialization</label>
+                        <select id="specialization" class ="form-control" required>
+                            <option  value="">Select Specialization</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="Dermatologist">Dermatologist</option>
+                            <option value="Neurologist">Neurologist</option>
+                            <option value="Orthopedic">Orthopedic</option>
+                            <option value="Pediatrician">Pediatrician</option>
+                            <option value="Psychiatrist">Psychiatrist</option>
+                            <option value="General Practitioner">General Practitioner</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contact Number</label>
+                        <input id="phone" type="tel" class="form-control" placeholder="Enter contact number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input id="email" type="email" class="form-control" placeholder="Enter email" required>
+                    </div>
+                    <button type="button" id="registerBTN" class="btn btn-primary w-100 mt-3">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center bg-dark text-light py-3" style="position: fixed; bottom: 0; width: 100%; height: 50px">
+    <div class="footer-container">
+        <p>&copy; 2025 HealthFirst Medical Center. All rights reserved.</p>
+    </div>
+</footer>
+<script src = "jq/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/Doctor.js"></script>
+</body>
+</html>
