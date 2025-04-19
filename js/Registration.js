@@ -10,6 +10,7 @@ $(document).ready(function () {
         let address = $("#address").val().trim();
         let password = $("#password").val().trim();
         let confirmPassword = $("#ConfirmPassword").val().trim();
+        let  role = "USER";
 
         // Validate if fields are empty
         if (!name || !nic || !age || !phone || !email || !address || !password || !confirmPassword) {
@@ -57,7 +58,8 @@ $(document).ready(function () {
                 contactNumber: phone,
                 email: email,
                 address: address,
-                password: password
+                password: password,
+                role: role
             }),
             success: function (response) {
                 Swal.fire({
