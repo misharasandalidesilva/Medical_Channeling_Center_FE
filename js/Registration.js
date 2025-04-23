@@ -1,93 +1,78 @@
+
 $(document).ready(function () {
-    $("#registerBTN").on("click", function () {
-        console.log("Register button clicked");
+    let selectedRole = null;
 
-        let name = $("#name").val().trim();
-        let nic = $("#nic").val().trim();
-        let age = $("#age").val().trim();
-        let phone = $("#mobile").val().trim();
-        let email = $("#email").val().trim();
-        let address = $("#address").val().trim();
-        let password = $("#password").val().trim();
-        let confirmPassword = $("#ConfirmPassword").val().trim();
-        let  role = "USER";
+    // Role selection
+    $('#patientBtn, #doctorBtn').click(function (e) {
+        e.preventDefault();
+        selectedRole = $(this).data("role");
+        $('#userRole').val(selectedRole);
 
-        // Validate if fields are empty
-        if (!name || !nic || !age || !phone || !email || !address || !password || !confirmPassword) {
+        // Add some UI feedback
+        $('#patientBtn, #doctorBtn').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    // Form submission
+    $('#registrationForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const email = $('#email').val();
+        const password = $('#password').val();
+        const confirmPassword = $('#confirmPassword').val();
+        const contactNumber = $('#phone').val();
+        const role = $('#userRole').val();
+
+        console.log(email, password, confirmPassword, contactNumber, role);
+
+        if (!role) {
             Swal.fire({
-                icon: "warning",
-                title: "Missing Information",
-                text: "Please fill in all fields before submitting.",
-                timer: 10000, // Closes after 3 seconds
-                timerProgressBar: true
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please select a role before registering.'
             });
             return;
         }
 
-        // Check if passwords match before making the request
         if (password !== confirmPassword) {
             Swal.fire({
-                icon: "error",
-                title: "Password Mismatch",
-                text: "Passwords do not match! Please try again.",
-                timer: 10000, // Closes after 3 seconds
-                timerProgressBar: true
+                icon: 'error',
+                title: 'Password Mismatch',
+                text: 'Passwords do not match!'
             });
             return;
         }
 
-        // Show loading alert before sending request
-        Swal.fire({
-            title: "Processing...",
-            text: "Please wait while we create your account.",
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
+        const userData = {
+            email: email,
+            password: password,
+            contactNumber: contactNumber,
+            role: role
+        };
 
-        // AJAX request to backend
         $.ajax({
-            url: "http://localhost:8080/api/v1/user/register",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                name: name,
-                nic: nic,
-                age: age,
-                contactNumber: phone,
-                email: email,
-                address: address,
-                password: password,
-                role: role
-            }),
+            url: 'http://localhost:8080/api/v1/user/register',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(userData),
             success: function (response) {
                 Swal.fire({
-                    icon: "success",
-                    title: "Registration Successful!",
-                    text: "Your account has been created successfully.",
-                    timer: 10000, // Closes after 3 seconds
-                    timerProgressBar: true,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                })
+                    icon: 'success',
+                    title: 'Registration Successful!',
+                    text: 'Your account has been created.'
+                }).then(() => {
+                    $('#registrationForm')[0].reset();
+                    $('#userRole').val('');
+                    $('#patientBtn, #doctorBtn').removeClass('active');
+                });
 
-                window.location.href = "./LoginPage.html";
+                window.location.href = 'LoginPage.html';
             },
             error: function (xhr) {
-                console.error("Registration failed:", xhr);
-                let errorMessage = "Something went wrong! Please try again.";
-
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    errorMessage = xhr.responseJSON.message; // Get error message from backend response
-                }
-
                 Swal.fire({
-                    icon: "error",
-                    title: "Registration Failed!",
-                    text: errorMessage,
-                    timer: 11000, // Closes after 4 seconds
-                    timerProgressBar: true
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: xhr.responseJSON?.message || 'Something went wrong. Please try again.'
                 });
             }
         });

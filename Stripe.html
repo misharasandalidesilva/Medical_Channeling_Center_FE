@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stripe Checkout</title>
+</head>
+<body>
+<h2>Buy Test Product</h2>
+<button id="checkout-button">Pay $10</button>
+
+<script>
+    document.getElementById("checkout-button").addEventListener("click", function () {
+        fetch("http://localhost:8080/api/v1/payment/create-checkout-session")
+            .then(response => response.json())
+            .then(data => {
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
+    });
+</script>
+</body>
+</html>

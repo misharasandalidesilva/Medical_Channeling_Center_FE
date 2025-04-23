@@ -1,38 +1,108 @@
-$("#registerBTN").on("click", function() {
-    console.log("Register button");
+$("#registerBtn").on("click", function() {
+    console.log("Register button clicked");
     let name = $("#name").val();
-    let nic = $("#nic").val();
-    let age = $("#age").val();
-    let phone = $("#mobile").val();
-    let email = $("#email").val();
+    let gender = $("#gender").val();
+    let birthdate = $("#birthday").val();
     let address = $("#address").val();
-    let password = $("#password").val();
-    let ConfirmPassword = $("#ConfirmPassword").val();
+    let age = $("#age").val();
 
     $.ajax({
-        url: 'http://localhost:8080/api/v1/user/register',
+        url: 'http://localhost:8080/api/v1/patient/savePatient',
         method: 'POST',
-        contentType: 'application/json',  // Set content type to JSON
+        contentType: 'application/json',
         data: JSON.stringify({
             name: name,
-            nic: nic,
-            age: age,
-            contactNumber: phone,
-            email: email,
+            gender: gender,
+            birthday: birthdate,
             address: address,
-            password: password,
-            confirmPassword: ConfirmPassword
+            age: age,
+            user: {
+                uid: localStorage.getItem("LoggedUserId")
+            }
         }),
         success: function(data) {
-            if (password === ConfirmPassword) {
-                alert("Patient Register successful!");
-            }else {
-                alert("Password does not match!");
-            }
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Patient registered successfully'
+            });
+            getPatientData();
+            window.location.href = "../UserProfile.html";
         },
         error: function(xhr, status, error) {
-            // Handle errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to register patient'
+            });
         }
     });
 });
+
+getPatientData();
+
+function getPatientData() {
+    $.ajax({
+        url: 'http://localhost:8080/api/v1/patient/getAllPatients',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(response) {
+            $('#patientTable').empty();
+            response.forEach(patient => {
+                $('#patientTable').append(`
+                    <tr>
+                        <td>${patient.name}</td>
+                        <td>${patient.gender}</td>
+                        <td>${patient.address}</td>
+                        <td>${patient.birthday}</td>
+                        <td>${patient.age}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="deletePatient('${patient.pid}')">Delete</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to fetch patient data'
+            });
+        }
+    });
+}
+
+function deletePatient(pid) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to delete this patient?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `http://localhost:8080/api/v1/patient/deletePatient/${pid}`,
+                method: 'DELETE',
+                contentType: 'application/json',
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'Patient deleted successfully'
+                    });
+                    getPatientData();
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Failed to delete patient'
+                    });
+                }
+            });
+        }
+    });
+}

@@ -28,14 +28,13 @@ $(document).ready(function () {
                 console.log(Authtoken);
                 console.log(rolee);
                 console.log(name);
-                console.log(uid);
 
-                    if (rolee === "USER") {
-                        window.location.href = "./UserProfile.html";
+                    if (rolee === "PATIENT") {
+                        window.location.href = "./PatientRegister.html";
                     } else if (rolee === "ADMIN") {
                         window.location.href = "./AdminDashboard.html";
                     } else if (rolee === "DOCTOR") {
-                        window.location.href = "./AdminDashboard-Doctor.html";
+                        window.location.href = "./DoctorRegister.html";
                     } else {
                         Swal.fire({
                             icon: 'error',
