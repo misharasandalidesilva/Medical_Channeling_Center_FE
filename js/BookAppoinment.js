@@ -8,9 +8,9 @@ $(document).ready(function () {
     $.ajax({
         url: `http://localhost:8080/api/v1/patient/getPatient/${loggedUserID}`,
         method: "GET",
-        // headers: {
-        //     "Authorization": "Bearer " + localStorage.getItem("authToken")
-        // },
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         success: function (response) {
             // console.log(response);
 
@@ -46,6 +46,9 @@ $(document).ready(function () {
                             url: `http://localhost:8080/api/v1/bookappoinment/saveAppoinments`,
                             method: "POST",
                             contentType: "application/json",
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("authToken")
+                            },
                             data: JSON.stringify({
                                 fullName: fullname,
                                 phone: mobile,
@@ -59,7 +62,7 @@ $(document).ready(function () {
                             success: function (response) {
                                 // console.log(response);
                                 loadAllAppoinments();
-                                window.location.href = "./PatientDashboard.html";
+                                window.location.href = "./PatientViewAppoinment.html";
                             },
                             error: function (xhr, status, error) {
                                 // console.error(error);
@@ -83,6 +86,9 @@ function loadAllAppoinments() {
             $.ajax({
                 url:"http://localhost:8080/api/v1/bookappoinment/getallAppointments",
                 method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("authToken")
+                },
                 success: function (response) {
                     // console.log(response);
                     $('#patienttableBody').empty();
@@ -94,7 +100,7 @@ function loadAllAppoinments() {
                                 <td>${appoinment.appointmentDate}</td>
                                 <td>${appoinment.phone}</td>
                                 <td>${appoinment.message}</td>
-                                <td><button type="button" class="btn btn-danger" onclick="deleteAppoinment('${appoinment.aid}')">Delete</button></td>
+                                <td><button type="button" class="btn btn-danger" onclick="deleteAppoinment('${appoinment.appId}')">Delete</button></td>
                             </tr>
                         `);
                     });
@@ -105,7 +111,22 @@ function loadAllAppoinments() {
             });
         }
 
-
+        function deleteAppoinment(appId) {
+            $.ajax({
+                url: `http://localhost:8080/api/v1/bookappoinment/cancel/${appId}`,
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("authToken")
+                },
+                success: function (response) {
+                    // console.log(response);
+                    loadAllAppoinments();
+                },
+                error: function (xhr, status, error) {
+                    // console.error(error);
+                },
+            });
+        }
 
 patientViewAppoinment();
 function patientViewAppoinment() {
@@ -115,6 +136,9 @@ function patientViewAppoinment() {
     $.ajax({
         url: `http://localhost:8080/api/v1/bookappoinment/getAppoinmentsPatientId/${patientId}`,
         method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         success: function (response) {
             console.log("Appointments for patient:", response);
             $('#myAppoinment').empty();

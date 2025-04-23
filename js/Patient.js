@@ -1,4 +1,4 @@
-$("#registerBtn").on("click", function() {
+    $("#registerBtn").on("click", function() {
     console.log("Register button clicked");
     let name = $("#name").val();
     let gender = $("#gender").val();
@@ -10,6 +10,9 @@ $("#registerBtn").on("click", function() {
         url: 'http://localhost:8080/api/v1/patient/savePatient',
         method: 'POST',
         contentType: 'application/json',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         data: JSON.stringify({
             name: name,
             gender: gender,
@@ -27,7 +30,7 @@ $("#registerBtn").on("click", function() {
                 text: 'Patient registered successfully'
             });
             getPatientData();
-            window.location.href = "../UserProfile.html";
+            window.location.href = "./UserProfile.html";
         },
         error: function(xhr, status, error) {
             Swal.fire({
@@ -46,6 +49,9 @@ function getPatientData() {
         url: 'http://localhost:8080/api/v1/patient/getAllPatients',
         method: 'GET',
         contentType: 'application/json',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         success: function(response) {
             $('#patientTable').empty();
             response.forEach(patient => {
@@ -87,6 +93,9 @@ function deletePatient(pid) {
                 url: `http://localhost:8080/api/v1/patient/deletePatient/${pid}`,
                 method: 'DELETE',
                 contentType: 'application/json',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("authToken")
+                },
                 success: function(response) {
                     Swal.fire({
                         icon: 'success',

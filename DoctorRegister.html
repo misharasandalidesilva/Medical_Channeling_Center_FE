@@ -11,14 +11,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Poppins', sans-serif;
+            /*font-family: 'Poppins', sans-serif;*/
         }
         .card {
             width: 500px;
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             background: #dde6ec;
+            margin-right: 400px;
         }
         #registerBtn {
             background: #145775;
@@ -30,11 +31,20 @@
             font-size: 18px;
             border-radius: 10px;
         }
+
+        .login-container img {
+            width: 60px;
+            display: block;
+            margin: -10px auto 20px;
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <div class="login-container">
+        <img src='assests/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo.png' alt="Medical Logo">
+    </div>
     <h3 class="text-center mb-4">Doctor Registration</h3>
     <form id="doctorForm">
         <div class="mb-3">
@@ -69,6 +79,7 @@
 
         <button type="button" id="registerBtn">Register as Doctor</button>
     </form>
+    <p class="text-center mt-3">Already have an account? <a href="LoginPage.html">Login here</a></p>
 </div>
 
 <script src = "jq/jquery-3.7.1.min.js"></script>

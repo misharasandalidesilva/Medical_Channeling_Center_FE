@@ -11,6 +11,9 @@ $('#registerBtn').on('click', function() {
         url: 'http://localhost:8080/api/v1/doctor/savedoctor',
         method: 'POST',
         contentType: 'application/json',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         data: JSON.stringify({
             name: name,
             gender: gender,
@@ -28,6 +31,7 @@ $('#registerBtn').on('click', function() {
                 text: 'Doctor information has been successfully saved.'
             });
             getDoctorData();
+            window.location.href = "./DoctorDashbord.html";
         },
         error: function(xhr, status, error) {
             Swal.fire({
@@ -46,6 +50,9 @@ function getDoctorData() {
         url: 'http://localhost:8080/api/v1/doctor/getdoctors',
         method: 'GET',
         contentType: 'application/json',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("authToken")
+        },
         success: function(response) {
             $('#doctortable').empty();
             response.forEach(doctor => {
@@ -57,7 +64,7 @@ function getDoctorData() {
                         <td>${doctor.address}</td>
                         <td>${doctor.specialization}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" onclick="deleteDoctor('${doctor.did}')">Delete</button>
+<button type="button" class="btn btn-danger" onclick="deleteDoctor('${doctor.id}')">Delete</button>
                         </td>
                     </tr>
                 `);
@@ -73,35 +80,20 @@ function getDoctorData() {
     });
 }
 
-function deleteDoctor(did) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "Do you want to delete this doctor?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete!',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: `http://localhost:8080/api/v1/doctor/deletedoctor/${did}`,
-                method: "DELETE",
-                contentType: "application/json",
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted!',
-                        text: 'Doctor has been deleted.'
-                    });
-                    getDoctorData();
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Delete Failed',
-                        text: 'Unable to delete the doctor.'
-                    });
-                }
+function deleteDoctor(id) {
+    $.ajax({
+        url: `http://localhost:8080/api/v1/doctor/deletedoctor/${id}`, // ✅ URL correct
+        method: "DELETE",
+        contentType: 'application/json',
+        success: function(response) {
+
+                getDoctorData(); // Refresh the list
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Delete Failed',
+                text: xhr.responseText || 'Unable to delete the doctor. Please try again later.'
             });
         }
     });
